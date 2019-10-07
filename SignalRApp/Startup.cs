@@ -54,8 +54,8 @@ namespace SignalRApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "vote",
-                    pattern: "{controller=vote}/{action=CastVote}");
+                endpoints.MapControllerRoute(name: "sms",
+                    pattern: "{controller=sms}/{action=ReceiveMessage}");
                 endpoints.MapRazorPages();
                 endpoints.MapHub<ChatHub>("/chatHub");
                 

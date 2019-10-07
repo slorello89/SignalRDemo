@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace SignalRApp
 {
-    public class VoteController : Controller
+    public class SmsController : Controller
     {
         private readonly IHubContext<ChatHub> _chatHub;
 
-        public VoteController(IHubContext<ChatHub> chatContext)
+        public SmsController(IHubContext<ChatHub> chatContext)
         {
             _chatHub = chatContext;
         }
         
-        public IActionResult CastVote([FromQuery]SMS.SMSInbound response)
+        public IActionResult ReceiveMessage([FromQuery]SMS.SMSInbound response)
         {
             _chatHub.Clients.All.SendAsync("ReceiveMessage", response.msisdn, response.text);
             return StatusCode(204);
