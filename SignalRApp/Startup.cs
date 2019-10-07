@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SignalRApp.Hubs;
+using Nancy.Owin;
+using Microsoft.AspNetCore.SignalR;
+
 
 namespace SignalRApp
 {
@@ -51,9 +54,21 @@ namespace SignalRApp
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(name: "vote",
+                    pattern: "{controller=vote}/{action=CastVote}");
                 endpoints.MapRazorPages();
                 endpoints.MapHub<ChatHub>("/chatHub");
+                
             });
+            
+            //app.UseOwin(x => x.UseNancy());
+            //app.Use(async (context, next) => {
+
+            //    var hubContext = context.RequestServices.GetRequiredService<IHubContext<ChatHub>>();
+            //    FruitVoteModule.ChatHubContext = hubContext;
+            //});
+
+
         }
     }
 }
